@@ -1,0 +1,44 @@
+.container{
+    margin-top: 80px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.card{
+    margin: 10px
+}
+
+
+
+.information{
+    border: 1px black solid;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    max-width: 800px;
+    margin: auto;
+    top: 300px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.information > p{
+    padding: 30px;
+}
+
+.information > a{
+    margin: 30px;
+}
+
+.none{
+    overflow: hidden;
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+    border: none;
+}

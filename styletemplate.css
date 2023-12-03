@@ -1,0 +1,55 @@
+.sep{
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.sep > a{
+    margin: 0 256px;
+}
+
+footer{
+    background-color: rgb(43, 43, 119);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+header{
+    background: rgb(43, 43, 119);
+    width: 100%;
+    clear: both;
+    content:'';
+    display: table;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333; /* Cambia el color de fondo según tu preferencia */
+    padding: 10px;
+  }
+  
+  .menu div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu a {
+    text-decoration: none;
+    color: #fff; /* Cambia el color del texto según tu preferencia */
+    margin-left: 10px; /* Ajusta el espacio entre elementos según tu preferencia */
+  }
+  
+  .menu img {
+    margin-right: 5px; /* Ajusta el espacio entre la imagen y el texto según tu preferencia */
+  }
+  
+  .carrito {
+    margin-left: auto; /* Mueve el carrito al extremo derecho */
+  }
+  
+
