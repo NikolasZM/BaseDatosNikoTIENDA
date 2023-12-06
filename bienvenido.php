@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Videojuegos Manager</title>
+    <script type= "text/javascript">
+        function confirmar(){
+            return confirm('¿Estás segudo?, se eliminaran todos los datos');
+        }
+    </script>
     <style>
         a{
             text-decoration: none;
