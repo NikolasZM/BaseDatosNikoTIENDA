@@ -1,0 +1,47 @@
+<!-- carrito.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito</title>
+  <style>
+    .container{
+        width: 350px;
+    }
+    .container2{
+        text-align: center;
+        color: white;
+        font-size: 20px;
+    }
+  </style>
+</head>
+<body background="play4.jpg">
+  <h2 class="container2">Información del producto en el carrito</h2>
+  <div class="container2">
+    <p>Nombre: <span id="productName"></span></p>
+    <p>Clasificación: <span id="productClassification"></span></p>
+    <p>Precio: <span id="productPrice"></span></p>
+    <img  class="container" src="" alt="Producto" id="productImage">
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Recuperar la información almacenada en sessionStorage
+      const productName = sessionStorage.getItem('productName');
+      const productClassification = sessionStorage.getItem('productClassification');
+      const productPrice = sessionStorage.getItem('productPrice');
+      const productImage = sessionStorage.getItem('productImage');
+
+      // Mostrar la información en la página
+      document.getElementById('productName').innerText = productName;
+      document.getElementById('productClassification').innerText = productClassification;
+      document.getElementById('productPrice').innerText = productPrice;
+
+      // Mostrar la imagen
+      document.getElementById('productImage').src = productImage;
+    });
+  </script>
+</body>
+</html>
+
