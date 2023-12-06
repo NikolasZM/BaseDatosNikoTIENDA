@@ -89,6 +89,14 @@
             background-color: #4caf50;
             color: white;
         }
+        table{
+            margin-bootom: 20px;
+        }
+        .excel{
+            position: fixed;
+            left: 0px;
+            bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -125,13 +133,41 @@
 
             <button type="submit">Agregar Juego</button>
         </form>
-
     <?php
     include("conexion_be.php");
-    $sql = "select * from juego";
+    $where = "";
+    $nombre = isset($_POST['fn']) ? $_POST['fn'] : "";
+    $precio = isset($_POST['fp']) ? $_POST['fp'] : "";
+    
+    if(isset($_POST['fbuscar']))
+    {
+        if($precio == "0")
+        {
+            $where = "where nombre like '%" . $nombre . "%'";
+
+        }
+        else if(empty($_POST['fn']))
+        {
+            $where = "order by precio " . $precio;
+        }else{
+            $where = "where nombre like '%$nombre%' order by precio $precio";
+        }
+    }
+    
+    $sql = "select * from juego $where";
     $resultado = mysqli_query($conexion,$sql);
+    
     ?>
     <H1>LISTA DE JUEGOS</H1>
+    <form method ="POST">
+            <select name="fp" id="">
+                <option value="0">Filtrar precio por:</option>
+                <option value="asc">Menor</option>
+                <option value="desc">Mayor</option>
+            </select>
+            <input name="fn" type="text" placeholder="Ingresar Nombre">
+            <button type="submit" name="fbuscar">Buscar</button>
+    </form>
     <table>
         <thead>
             <tr>
@@ -159,7 +195,7 @@
                 <td><?php echo $filas['id_plataforma']?></td>
                 <td>
                     <?php echo "<a href='editar.php?id=".$filas['id']."'>EDITAR</a>";?>
-                    <?php echo "<a href='eliminar.php?id=".$filas['id']."' onclick='return confirmar()'>ELIMINAR</a>";?>
+                    <?php echo "<a href='eliminar.php'>ELIMINAR</a>";?>
                 </td>
             </tr>
             <?php
@@ -168,5 +204,8 @@
         </tbody>
     </table>
     </main>
+    <a href="./excel.php" class="excel">Descargar Excel</a>
+
+
 </body>
 </html>
