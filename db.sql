@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2023 a las 20:36:42
+-- Tiempo de generación: 07-12-2023 a las 02:06:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -67,10 +67,28 @@ CREATE TABLE `cliente` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `telefono` int(11) NOT NULL,
-  `historial_compras` varchar(255) NOT NULL,
+  `historial_compras` varchar(255) DEFAULT NULL,
   `dni` int(11) NOT NULL,
   `carnet_extranjeria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nombre`, `telefono`, `historial_compras`, `dni`, `carnet_extranjeria`) VALUES
+(10, 'Nikolas Zuñiga', 993623517, NULL, 72865491, NULL),
+(11, 'Pepe Puentes', 85558555, NULL, 21121321, 0),
+(12, 'Flac', 121212, NULL, 1212121, 0),
+(13, '2222', 131, NULL, 312313, 0),
+(14, '2222', 131, NULL, 312313, 0),
+(15, 'dwdw', 444, NULL, 4444, 0),
+(16, 'dwdw', 444, NULL, 4444, 0),
+(17, '2', 1, NULL, 2, 0),
+(18, 'e2', 121, NULL, 12211, 0),
+(19, 'ee', 1212, NULL, 1221, 0),
+(20, 'ee', 1212, NULL, 1221, 0),
+(21, 'Franco', 121212, NULL, 12121212, 0);
 
 -- --------------------------------------------------------
 
@@ -136,6 +154,16 @@ CREATE TABLE `encargado` (
   `id_tienda` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `encargado`
+--
+
+INSERT INTO `encargado` (`id_trabajador`, `id_tienda`) VALUES
+(1, 1),
+(16, 2),
+(17, 3),
+(18, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -158,11 +186,10 @@ CREATE TABLE `juego` (
 --
 
 INSERT INTO `juego` (`id`, `nombre`, `precio`, `clasificacion`, `img_link`, `id_desarrollador`, `id_categoria`, `id_plataforma`) VALUES
-(1, 'The Witcher 3: Wild Hunt', 2999, 'Mature', 'https://blog.latam.playstation.com/tachyon/sites/3/2022/12/b056814c7a673ed50a5a5bf2923ae64825b76257.jpg?resize=1088%2C612&crop_strategy=smart&zoom=1.5', 1, 2, 1),
+(1, 'The Witcher 3: Wild Hunt', 90, 'Mature', 'https://blog.latam.playstation.com/tachyon/sites/3/2022/12/b056814c7a673ed50a5a5bf2923ae64825b76257.jpg?resize=1088%2C612&crop_strategy=smart&zoom=1.5', 1, 2, 1),
 (2, 'Minecraft', 999, 'Everyone', 'https://store-images.s-microsoft.com/image/apps.608.13850085746326678.a9b1e0db-29d0-40f3-a86c-2155353d053c.bc981608-3fa4-4929-82ff-b162b8788784?q=90&w=480&h=270', 2, 4, 3),
-(3, 'Fortnite', 0, 'Teen', 'https://cdn2.unrealengine.com/download-og-social-1920x1080-7f9830781b04.jpg', 9, 6, 1),
-(4, 'Grand Theft Auto V', 2499, 'Mature', 'https://assets2.ignimgs.com/2014/11/17/gta-v-bigjpg-e94b8d1280wjpg-e14d62_160w.jpg?width=1280', 4, 1, 2),
-(5, 'Overwatch', 1999, 'Teen', 'https://fs-prod-cdn.nintendo-europe.com/media/images/10_share_images/games_15/nintendo_switch_download_software_1/2x1_NSwitchDS_Overwatch2_Season6.png', 5, 3, 1);
+(3, 'Fortnite', 100, 'Teen', 'https://cdn2.unrealengine.com/download-og-social-1920x1080-7f9830781b04.jpg', 9, 6, 1),
+(4, 'Grand Theft Auto V', 2499, 'Mature', 'https://assets2.ignimgs.com/2014/11/17/gta-v-bigjpg-e94b8d1280wjpg-e14d62_160w.jpg?width=1280', 4, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -219,7 +246,8 @@ INSERT INTO `plataforma` (`id`, `nombre`) VALUES
 (1, 'PC'),
 (2, 'PlayStation 4'),
 (3, 'Nintendo Switch'),
-(4, 'Android');
+(4, 'Android'),
+(5, 'XBOX ONE');
 
 -- --------------------------------------------------------
 
@@ -248,6 +276,19 @@ CREATE TABLE `stock` (
   `id_juego` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `stock`
+--
+
+INSERT INTO `stock` (`id`, `cantidad`, `id_tienda`, `id_juego`) VALUES
+(1, '20', 1, 1),
+(2, '15', 1, 2),
+(3, '40', 1, 3),
+(4, '15', 2, 4),
+(9, '23', 3, 2),
+(10, '21', 4, 1),
+(11, '14', 4, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -259,6 +300,16 @@ CREATE TABLE `tienda` (
   `ciudad` varchar(255) NOT NULL,
   `direccion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tienda`
+--
+
+INSERT INTO `tienda` (`id`, `ciudad`, `direccion`) VALUES
+(1, 'Arequipa', 'Av. Ejercito 1001'),
+(2, 'Lima', 'Av. la Marina 2000'),
+(3, 'Tacna', 'Av. Augusto B Leguia '),
+(4, 'Cusco', 'Av. Collasuyo 2964');
 
 -- --------------------------------------------------------
 
@@ -273,6 +324,31 @@ CREATE TABLE `trabajador` (
   `telefono` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `trabajador`
+--
+
+INSERT INTO `trabajador` (`id`, `nombre`, `salario`, `telefono`) VALUES
+(1, 'Nikolas Zuñiga', 1500, 993623517),
+(2, 'Jean Marc Nadeau', 1500, 962864411),
+(3, 'Sergio Sirena', 1050, 983434477),
+(4, 'Walter Valdivia', 1500, 991869615),
+(5, 'Pepe Puentes', 1350, 994321432),
+(6, 'Juan Pérez', 1560, 926587432),
+(7, 'María Gómez', 1060, 917654321),
+(8, 'Luis Rodríguez', 1500, 932145678),
+(9, 'Ana García', 1070, 924876509),
+(10, 'Pedro Sánchez', 1100, 931234567),
+(11, 'Laura Martínez', 1200, 926543218),
+(12, 'Carlos López', 1590, 932187654),
+(13, 'Isabel Torres', 1150, 914567890),
+(14, 'Javier Ruiz', 1480, 927654321),
+(15, 'Elena González', 1300, 931234567),
+(16, 'Sofía López', 1130, 917890123),
+(17, 'Alejandro Ruiz', 1300, 923456789),
+(18, 'Carmen Martínez', 1420, 926789012),
+(19, 'Raúl Fernández', 1550, 931789012);
+
 -- --------------------------------------------------------
 
 --
@@ -284,6 +360,23 @@ CREATE TABLE `vendedor` (
   `historial_ventas` varchar(255) NOT NULL,
   `id_tienda` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `vendedor`
+--
+
+INSERT INTO `vendedor` (`id_trabajador`, `historial_ventas`, `id_tienda`) VALUES
+(2, '2 venta(s)', 1),
+(3, 'NINGUNO', 1),
+(4, '1 venta(s)', 1),
+(5, '45 venta(s)', 2),
+(6, '14 venta(s)', 2),
+(7, '23 venta(s)', 2),
+(8, '8 venta(s)', 3),
+(9, '1 venta(s)', 3),
+(10, '25 venta(s)', 3),
+(11, '13 venta(s)', 4),
+(12, '8 venta(s)', 4);
 
 --
 -- Índices para tablas volcadas
@@ -406,6 +499,34 @@ ALTER TABLE `vendedor`
   ADD KEY `id_tienda` (`id_tienda`);
 
 --
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de la tabla `pddo_head`
+--
+ALTER TABLE `pddo_head`
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `stock`
+--
+ALTER TABLE `stock`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `trabajador`
+--
+ALTER TABLE `trabajador`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -413,27 +534,35 @@ ALTER TABLE `vendedor`
 -- Filtros para la tabla `boleta`
 --
 ALTER TABLE `boleta`
-  ADD CONSTRAINT `boleta_ibfk_1` FOREIGN KEY (`id_pedido_head`) REFERENCES `pddo_head` (`numero`);
+  ADD CONSTRAINT `boleta_ibfk_1` FOREIGN KEY (`id_pedido_head`) REFERENCES `pddo_head` (`numero`),
+  ADD CONSTRAINT `boleta_ibfk_2` FOREIGN KEY (`id_pedido_head`) REFERENCES `pddo_head` (`numero`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `detalle_boleta`
 --
 ALTER TABLE `detalle_boleta`
-  ADD CONSTRAINT `detalle_boleta_ibfk_1` FOREIGN KEY (`item`) REFERENCES `boleta` (`id`);
+  ADD CONSTRAINT `detalle_boleta_ibfk_1` FOREIGN KEY (`item`) REFERENCES `boleta` (`id`),
+  ADD CONSTRAINT `detalle_boleta_ibfk_2` FOREIGN KEY (`item`) REFERENCES `boleta` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
   ADD CONSTRAINT `devolucion_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
-  ADD CONSTRAINT `devolucion_ibfk_2` FOREIGN KEY (`numero_boleta`) REFERENCES `boleta` (`id`);
+  ADD CONSTRAINT `devolucion_ibfk_2` FOREIGN KEY (`numero_boleta`) REFERENCES `boleta` (`id`),
+  ADD CONSTRAINT `devolucion_ibfk_3` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `devolucion_ibfk_4` FOREIGN KEY (`numero_boleta`) REFERENCES `boleta` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `encargado`
 --
 ALTER TABLE `encargado`
   ADD CONSTRAINT `encargado_ibfk_1` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id`),
-  ADD CONSTRAINT `encargado_ibfk_2` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`);
+  ADD CONSTRAINT `encargado_ibfk_2` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`),
+  ADD CONSTRAINT `encargado_ibfk_3` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `encargado_ibfk_4` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `encargado_ibfk_5` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `encargado_ibfk_6` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `juego`
@@ -441,19 +570,25 @@ ALTER TABLE `encargado`
 ALTER TABLE `juego`
   ADD CONSTRAINT `juego_ibfk_1` FOREIGN KEY (`id_desarrollador`) REFERENCES `desarrollador` (`id`),
   ADD CONSTRAINT `juego_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`),
-  ADD CONSTRAINT `juego_ibfk_3` FOREIGN KEY (`id_plataforma`) REFERENCES `plataforma` (`id`);
+  ADD CONSTRAINT `juego_ibfk_3` FOREIGN KEY (`id_plataforma`) REFERENCES `plataforma` (`id`),
+  ADD CONSTRAINT `juego_ibfk_4` FOREIGN KEY (`id_desarrollador`) REFERENCES `desarrollador` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `juego_ibfk_5` FOREIGN KEY (`id_desarrollador`) REFERENCES `desarrollador` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `juego_ibfk_6` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `juego_ibfk_7` FOREIGN KEY (`id_plataforma`) REFERENCES `plataforma` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
-  ADD CONSTRAINT `metodo_pago_ibfk_1` FOREIGN KEY (`numero_boleta`) REFERENCES `boleta` (`id`);
+  ADD CONSTRAINT `metodo_pago_ibfk_1` FOREIGN KEY (`numero_boleta`) REFERENCES `boleta` (`id`),
+  ADD CONSTRAINT `metodo_pago_ibfk_2` FOREIGN KEY (`numero_boleta`) REFERENCES `boleta` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `pddo_body`
 --
 ALTER TABLE `pddo_body`
-  ADD CONSTRAINT `pddo_body_ibfk_1` FOREIGN KEY (`item`) REFERENCES `pddo_head` (`numero`);
+  ADD CONSTRAINT `pddo_body_ibfk_1` FOREIGN KEY (`item`) REFERENCES `pddo_head` (`numero`),
+  ADD CONSTRAINT `pddo_body_ibfk_2` FOREIGN KEY (`item`) REFERENCES `pddo_head` (`numero`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `pddo_head`
@@ -466,21 +601,33 @@ ALTER TABLE `pddo_head`
 --
 ALTER TABLE `resenas`
   ADD CONSTRAINT `resenas_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juego` (`id`),
-  ADD CONSTRAINT `resenas_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`);
+  ADD CONSTRAINT `resenas_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
+  ADD CONSTRAINT `resenas_ibfk_3` FOREIGN KEY (`id_juego`) REFERENCES `juego` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `resenas_ibfk_4` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `resenas_ibfk_5` FOREIGN KEY (`id_juego`) REFERENCES `juego` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `resenas_ibfk_6` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `stock`
 --
 ALTER TABLE `stock`
   ADD CONSTRAINT `stock_ibfk_1` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`),
-  ADD CONSTRAINT `stock_ibfk_2` FOREIGN KEY (`id_juego`) REFERENCES `juego` (`id`);
+  ADD CONSTRAINT `stock_ibfk_2` FOREIGN KEY (`id_juego`) REFERENCES `juego` (`id`),
+  ADD CONSTRAINT `stock_ibfk_3` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `stock_ibfk_4` FOREIGN KEY (`id_juego`) REFERENCES `juego` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `stock_ibfk_5` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `stock_ibfk_6` FOREIGN KEY (`id_juego`) REFERENCES `juego` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `vendedor`
 --
 ALTER TABLE `vendedor`
   ADD CONSTRAINT `vendedor_ibfk_1` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id`),
-  ADD CONSTRAINT `vendedor_ibfk_2` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`);
+  ADD CONSTRAINT `vendedor_ibfk_2` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`),
+  ADD CONSTRAINT `vendedor_ibfk_3` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `vendedor_ibfk_4` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `vendedor_ibfk_5` FOREIGN KEY (`id_trabajador`) REFERENCES `trabajador` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `vendedor_ibfk_6` FOREIGN KEY (`id_tienda`) REFERENCES `tienda` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
