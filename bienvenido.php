@@ -195,7 +195,7 @@
                 <td><?php echo $filas['id_plataforma']?></td>
                 <td>
                     <?php echo "<a href='editar.php?id=".$filas['id']."'>EDITAR</a>";?>
-                    <?php echo "<a href='eliminar.php'>ELIMINAR</a>";?>
+                    <?php echo "<a href='eliminar.php?id=".$filas['id']."' onclick='return confirmar()'>ELIMINAR</a>";?>
                 </td>
             </tr>
             <?php
