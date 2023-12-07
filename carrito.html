@@ -24,7 +24,8 @@
     <p>Precio: <span id="productPrice"></span></p>
     <img  class="container" src="" alt="Producto" id="productImage">
   </div>
-
+  
+<button class="back-button">Comprar</button>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Recuperar la información almacenada en sessionStorage
@@ -40,8 +41,20 @@
 
       // Mostrar la imagen
       document.getElementById('productImage').src = productImage;
+
+      const backButton = document.querySelector('.back-button');
+      
+      backButton.addEventListener('click', () => {
+        window.location.href = 'boleta.html';
+      });
+
+
+
     });
+
+
+
   </script>
+
 </body>
 </html>
-

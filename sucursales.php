@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videojuegos Manager</title>
+    <title>Sucursales Manager</title>
 
     <script type= "text/javascript">
         function confirmar(){
             return confirm('¿Estás segudo?, se eliminaran todos los datos');
         }
     </script>
-
     <style>
         a{
             text-decoration: none;
@@ -96,98 +95,49 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: #333; /* Cambia el color de fondo según tu preferencia */
     padding: 10px;
-
-    table{
-            margin-bootom: 20px;
-        }
-        .excel{
-            position: fixed;
-            left: 0px;
-            bottom: 0;
-        }
   }
     </style>
-
-    
 </head>
 <body>
     <header>
-        <h1>Manager Videojuegos</h1>
+        <h1>Manager Sucursales</h1>
         <div class="menu">
-        <div><a href="sucursales.php">Videojuegos</a></div> 
-        <?php echo "<a href='sucursales.php?id="."'>Sucursales</a>";?>
+        <?php echo "<a href='bienvenido.php?id="."'>Videojuegos</a>";?>
+        <div><a href="sucursales.php">Sucursales</a></div> 
             </div>
 
 
     </header>
 
     <main>
-        <form action="Agregarjuego.php" method="POST">
-            <h2>Agregar Nuevo Juego</h2>
+        <form action="Agregarsucursal.php" method="POST">
+            <h2>Agregar Nueva Sucursal</h2>
             <label for="id">ID:</label>
             <input type="text" id="id" name="id" required>
 
-            <label for="nombre">Nombre del Juego:</label>
-            <input type="text" id="nombre" name="nombre" required>
+            <label for="ciudad">Ciudad de la sucursal:</label>
+            <input type="text" id="ciudad" name="ciudad" required>
 
-            <label for="precio">Precio:</label>
-            <input type="text" id="precio" name="precio" required>
+            <label for="direccion">Direccion:</label>
+            <input type="text" id="direccion" name="direccion" required>
 
-            <label for="clasificacion">Clasificación:</label>
-            <input type="text" id="clasificacion" name="clasificacion" required>
-
-            <label for="img_link">img_link:</label>
-            <input type="text" id="img_link" name="img_link" required>
-
-            <label for="id_desarrollador">Id Desarrollador:</label>
-            <input type="text" id="id_desarrollador" name="id_desarrollador" required>
-
-            <label for="id_categoria">Id Categoria:</label>
-            <input type="text" id="id_categoria" name="id_categoria" required>
-
-            <label for="id_plataforma">Id Plataforma:</label>
-            <input type="text" id="id_plataforma" name="id_plataforma" required>
-
-            <button type="submit">Agregar Juego</button>
+            <button type="submit">Agregar Sucursal</button>
         </form>
 
     <?php
     include("conexion_be.php");
-    
-    $where = "";
-    $nombre = isset($_POST['fn']) ? $_POST['fn'] : "";
-    $precio = isset($_POST['fp']) ? $_POST['fp'] : "";
-
-    if(isset($_POST['fbuscar']))
-    {
-        if($precio == "0")
-        {
-            $where = "where nombre like '%" . $nombre . "%'";
-
-        }
-        else if(empty($_POST['fn']))
-        {
-            $where = "order by precio " . $precio;
-        }else{
-            $where = "where nombre like '%$nombre%' order by precio $precio";
-        }
-    }
-    $sql = "select * from juego $where";
+    $sql = "select * from tienda";
     $resultado = mysqli_query($conexion,$sql);
     ?>
-    <H1>LISTA DE JUEGOS</H1>
+    <H1>LISTA DE SUCURSALES</H1>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Clasificacion</th>
-                <th>Id Desarrollador</th>
-                <th>ID Cateogoria</th>
-                <th>Id plataforma</th>
+                <th>Ciudad</th>
+                <th>Direccion</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -197,15 +147,11 @@
                 ?>
             <tr>
                 <td><?php echo $filas['id']?></td>
-                <td><?php echo $filas['nombre']?></td>
-                <td><?php echo $filas['precio']?></td>
-                <td><?php echo $filas['clasificacion']?></td>
-                <td><?php echo $filas['id_desarrollador']?></td>
-                <td><?php echo $filas['id_categoria']?></td>
-                <td><?php echo $filas['id_plataforma']?></td>
+                <td><?php echo $filas['ciudad']?></td>
+                <td><?php echo $filas['direccion']?></td>
                 <td>
-                    <?php echo "<a href='editar.php?id=".$filas['id']."'>EDITAR</a>";?>
-                    <?php echo "<a href='eliminar.php?id=".$filas['id']."' onclick='return confirmar()'>ELIMINAR</a>";?>
+                    <?php echo "<a href='editarSucursal.php?id=".$filas['id']."'>EDITAR</a>";?>
+                    <?php echo "<a href='eliminarSucursal.php?id=".$filas['id']."' onclick='return confirmar()'>ELIMINAR</a>";?>
                 </td>
             </tr>
             <?php
@@ -218,7 +164,7 @@
     $sql1 = "select * from stock";
     $resultado1 = mysqli_query($conexion,$sql1);
     ?>
-    <H1>STOCK DE LOS JUEGOS</H1>
+    <H1>STOCK DE LAS SUCURSALES</H1>
     <table>
         <thead>
             <tr>
@@ -245,7 +191,45 @@
             ?>
         </tbody>
     </table>
+
+    <?php
+    $sql2 = "SELECT v.id_trabajador AS id, t.nombre AS nombre, t.salario AS salario, 
+            t.telefono AS telefono, v.historial_ventas, v.id_tienda 
+            FROM vendedor v 
+            JOIN trabajador t ON v.id_trabajador = t.id;";
+    $resultado2 = mysqli_query($conexion,$sql2);
+    ?>
+    <H1>VENDEDORES DE LAS SUCURSALES</H1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Salario</th>
+                <th>Telefono</th>
+                <th>Historial de ventas</th>
+                <th>ID Tienda</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            while($filas = mysqli_fetch_assoc($resultado2)){
+                ?>
+            <tr>
+                <td><?php echo $filas['id']?></td>
+                <td><?php echo $filas['nombre']?></td>
+                <td><?php echo $filas['salario']?></td>
+                <td><?php echo $filas['telefono']?></td>
+                <td><?php echo $filas['historial_ventas']?></td>
+                <td><?php echo $filas['id_tienda']?></td>
+
+            </tr>
+            <?php
+            }
+            ?>
+        </tbody>
+    </table>
     </main>
-    <a href="./excel.php" class="excel">Descargar Excel</a>
 </body>
 </html>

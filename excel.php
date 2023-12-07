@@ -31,4 +31,3 @@ header("content-disposition: attachment; filename=Juegos.xls");
         </tr>
         <?php }?>
 </table>
-
