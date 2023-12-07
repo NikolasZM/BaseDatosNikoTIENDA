@@ -13,10 +13,10 @@
         $sql2 = "delete from tienda where id = '".$id."'";
         $resultado2 = mysqli_query($conexion,$sql2);
             if($resultado2 && $resultado && $resultado1 && $resultado3){
-                echo "<script>alert('LOS DATOS SE ELIMINARON CORRECTAMENTE');location.assign('sucursal.php');</script>";
+                echo "<script>alert('LOS DATOS SE ELIMINARON CORRECTAMENTE');location.assign('sucursales.php');</script>";
             }
             else{
-            echo "<script> alert('LOS DATOS NO FUERON ACTUALIZADOS CORRECTAMENTE, POR FAVOR REVISE QUE SUCEDIÓ');location.assign('sucursal.php');</script>"; 
+            echo "<script> alert('LOS DATOS NO FUERON ACTUALIZADOS CORRECTAMENTE, POR FAVOR REVISE QUE SUCEDIÓ');location.assign('sucursales.php');</script>"; 
             }
 
     mysqli_close($conexion);

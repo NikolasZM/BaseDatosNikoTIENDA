@@ -178,6 +178,15 @@
     $resultado = mysqli_query($conexion,$sql);
     ?>
     <H1>LISTA DE JUEGOS</H1>
+    <form method ="POST">
+            <select name="fp" id="">
+                <option value="0">Filtrar precio por:</option>
+                <option value="asc">Menor</option>
+                <option value="desc">Mayor</option>
+            </select>
+            <input name="fn" type="text" placeholder="Ingresar Nombre">
+            <button type="submit" name="fbuscar">Buscar</button>
+    </form>
     <table>
         <thead>
             <tr>

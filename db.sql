@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-12-2023 a las 02:06:37
+-- Tiempo de generación: 07-12-2023 a las 04:23:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -32,6 +32,17 @@ CREATE TABLE `boleta` (
   `monto` int(11) NOT NULL,
   `id_pedido_head` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `boleta`
+--
+
+INSERT INTO `boleta` (`id`, `monto`, `id_pedido_head`) VALUES
+(1, 120, 1),
+(2, 125, 2),
+(3, 85, 3),
+(4, 90, 4),
+(5, 50, 5);
 
 -- --------------------------------------------------------
 
@@ -77,18 +88,11 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nombre`, `telefono`, `historial_compras`, `dni`, `carnet_extranjeria`) VALUES
-(10, 'Nikolas Zuñiga', 993623517, NULL, 72865491, NULL),
-(11, 'Pepe Puentes', 85558555, NULL, 21121321, 0),
-(12, 'Flac', 121212, NULL, 1212121, 0),
-(13, '2222', 131, NULL, 312313, 0),
-(14, '2222', 131, NULL, 312313, 0),
-(15, 'dwdw', 444, NULL, 4444, 0),
-(16, 'dwdw', 444, NULL, 4444, 0),
-(17, '2', 1, NULL, 2, 0),
-(18, 'e2', 121, NULL, 12211, 0),
-(19, 'ee', 1212, NULL, 1221, 0),
-(20, 'ee', 1212, NULL, 1221, 0),
-(21, 'Franco', 121212, NULL, 12121212, 0);
+(23, 'Juan', 12223213, NULL, 123213213, 0),
+(24, 'Juan Carlos Leon', 956865452, NULL, 78596589, NULL),
+(25, 'Alain Freiker', 985412147, NULL, 78965458, NULL),
+(26, 'Paolo Rivera', 958412542, NULL, 74542563, NULL),
+(27, 'German Garcia', 956321458, NULL, 78546582, NULL);
 
 -- --------------------------------------------------------
 
@@ -130,6 +134,17 @@ CREATE TABLE `detalle_boleta` (
   `id_juego` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detalle_boleta`
+--
+
+INSERT INTO `detalle_boleta` (`item`, `descripcion`, `cantidad`, `id_juego`) VALUES
+(1, 'Minecraft', 1, 2),
+(2, 'Fortnite', 2, 4),
+(3, 'The Witcher 3', 1, 1),
+(4, 'GTA VI', 2, 3),
+(5, 'The Witcher', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -142,6 +157,17 @@ CREATE TABLE `devolucion` (
   `id_cliente` int(11) NOT NULL,
   `numero_boleta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `devolucion`
+--
+
+INSERT INTO `devolucion` (`id`, `motivo`, `id_cliente`, `numero_boleta`) VALUES
+(1, 'No me gusto', 23, 1),
+(2, 'Mi mamá me pega', 25, 2),
+(3, 'Mi laptop no lo corre', 25, 3),
+(4, 'No me gusta', 24, 3),
+(5, 'Es muy mal juego', 26, 5);
 
 -- --------------------------------------------------------
 
@@ -162,7 +188,8 @@ INSERT INTO `encargado` (`id_trabajador`, `id_tienda`) VALUES
 (1, 1),
 (16, 2),
 (17, 3),
-(18, 4);
+(18, 4),
+(19, 5);
 
 -- --------------------------------------------------------
 
@@ -189,7 +216,8 @@ INSERT INTO `juego` (`id`, `nombre`, `precio`, `clasificacion`, `img_link`, `id_
 (1, 'The Witcher 3: Wild Hunt', 90, 'Mature', 'https://blog.latam.playstation.com/tachyon/sites/3/2022/12/b056814c7a673ed50a5a5bf2923ae64825b76257.jpg?resize=1088%2C612&crop_strategy=smart&zoom=1.5', 1, 2, 1),
 (2, 'Minecraft', 999, 'Everyone', 'https://store-images.s-microsoft.com/image/apps.608.13850085746326678.a9b1e0db-29d0-40f3-a86c-2155353d053c.bc981608-3fa4-4929-82ff-b162b8788784?q=90&w=480&h=270', 2, 4, 3),
 (3, 'Fortnite', 100, 'Teen', 'https://cdn2.unrealengine.com/download-og-social-1920x1080-7f9830781b04.jpg', 9, 6, 1),
-(4, 'Grand Theft Auto V', 2499, 'Mature', 'https://assets2.ignimgs.com/2014/11/17/gta-v-bigjpg-e94b8d1280wjpg-e14d62_160w.jpg?width=1280', 4, 1, 2);
+(4, 'GTA VI', 120, 'Mature', 'https://phantom-marca.unidadeditorial.es/a8a24d3d612db3b9e1a3b43269ff07f7/resize/828/f/jpg/assets/multimedia/imagenes/2023/11/24/17008233975892.jpg', 7, 1, 2),
+(5, 'Terraria', 120, 'Everyone', 'https://www.mundodeportivo.com/alfabeta/hero/2021/08/Terraria-disponible-para-Android-iOS-y-Steam.jpg?width=1200', 6, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -203,6 +231,17 @@ CREATE TABLE `metodo_pago` (
   `numero_boleta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `metodo_pago`
+--
+
+INSERT INTO `metodo_pago` (`id`, `descripcion`, `numero_boleta`) VALUES
+(1, 'Credito Visa', 1),
+(2, 'Efectivo', 2),
+(3, 'efectivo', 3),
+(4, 'Tarjeta Credito', 4),
+(5, 'Tarjeta Visa', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -215,6 +254,17 @@ CREATE TABLE `pddo_body` (
   `id_juego` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `pddo_body`
+--
+
+INSERT INTO `pddo_body` (`item`, `cantidad`, `id_juego`) VALUES
+(1, 1, 2),
+(2, 2, 4),
+(3, 1, 1),
+(4, 2, 3),
+(5, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -226,6 +276,17 @@ CREATE TABLE `pddo_head` (
   `fecha` datetime NOT NULL,
   `id_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pddo_head`
+--
+
+INSERT INTO `pddo_head` (`numero`, `fecha`, `id_cliente`) VALUES
+(1, '2023-12-07 04:09:54', 23),
+(2, '2023-12-07 04:09:54', 24),
+(3, '2023-12-07 04:09:54', 25),
+(4, '2023-12-07 04:09:54', 26),
+(5, '2023-12-07 04:09:54', 27);
 
 -- --------------------------------------------------------
 
@@ -263,6 +324,17 @@ CREATE TABLE `resenas` (
   `id_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `resenas`
+--
+
+INSERT INTO `resenas` (`id`, `estrella`, `comentario`, `id_juego`, `id_cliente`) VALUES
+(1, 5, 'Buen juego', 3, 24),
+(2, 0, 'Que asco de juego no corre.', 4, 25),
+(3, 3, 'Buen juego loco', 3, 27),
+(4, 5, 'Me gusta', 1, 23),
+(5, 5, 'buen juego me recuerda a Tacna', 2, 26);
+
 -- --------------------------------------------------------
 
 --
@@ -284,10 +356,14 @@ INSERT INTO `stock` (`id`, `cantidad`, `id_tienda`, `id_juego`) VALUES
 (1, '20', 1, 1),
 (2, '15', 1, 2),
 (3, '40', 1, 3),
-(4, '15', 2, 4),
+(4, '23', 2, 5),
+(5, '15', 2, 2),
+(6, '12', 3, 4),
+(7, '23', 4, 2),
+(8, '45', 4, 1),
 (9, '23', 3, 2),
-(10, '21', 4, 1),
-(11, '14', 4, 4);
+(10, '25', 5, 1),
+(11, '35', 5, 5);
 
 -- --------------------------------------------------------
 
@@ -306,10 +382,11 @@ CREATE TABLE `tienda` (
 --
 
 INSERT INTO `tienda` (`id`, `ciudad`, `direccion`) VALUES
-(1, 'Arequipa', 'Av. Ejercito 1001'),
-(2, 'Lima', 'Av. la Marina 2000'),
-(3, 'Tacna', 'Av. Augusto B Leguia '),
-(4, 'Cusco', 'Av. Collasuyo 2964');
+(1, 'Arequipa', 'Av. ejercito 2964'),
+(2, 'Lima', 'Av. Hamilton 2964'),
+(3, 'Japon', 'Av. Collasuyo 2964'),
+(4, 'Tacna', 'Av. Tacna43'),
+(5, 'Puno', 'Av. Javier Prado');
 
 -- --------------------------------------------------------
 
@@ -375,8 +452,12 @@ INSERT INTO `vendedor` (`id_trabajador`, `historial_ventas`, `id_tienda`) VALUES
 (8, '8 venta(s)', 3),
 (9, '1 venta(s)', 3),
 (10, '25 venta(s)', 3),
-(11, '13 venta(s)', 4),
-(12, '8 venta(s)', 4);
+(11, '16 venta(s)', 4),
+(12, '23 venta(s)', 4),
+(13, '14 venta(s)', 4),
+(14, '21 venta(s)', 5),
+(15, '1 venta(s)', 5),
+(16, '14 venta(s)', 5);
 
 --
 -- Índices para tablas volcadas
@@ -506,13 +587,13 @@ ALTER TABLE `vendedor`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `pddo_head`
 --
 ALTER TABLE `pddo_head`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `stock`

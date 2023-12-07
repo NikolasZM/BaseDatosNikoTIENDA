@@ -11,13 +11,13 @@ include("conexion_be.php");
       $id = $_POST['id'];
       $ciudad = $_POST['ciudad'];
       $direccion = $_POST['direccion'];
-      $sql = "update tienda set id = '".$id."',ciudad = '".$ciudad."',direccion = '".$direccion."'";
+      $sql = "update tienda set ciudad = '".$ciudad."',direccion = '".$direccion."' where id = '".$id."'";
       $resultado = mysqli_query($conexion,$sql);
       if($resultado){
-        echo "<script> alert('LOS DATOS SE ACTUALIZARON CORRECTAMENTE'); location.assign('sucursal.php')</script>";
+        echo "<script> alert('LOS DATOS SE ACTUALIZARON CORRECTAMENTE'); location.assign('sucursales.php')</script>";
       }
       else{
-        echo "<script> alert('LOS DATOS NO FUERON ACTUALIZADOS CORRECTAMENTE, POR FAVOR REVISE QUE SUCEDIÓ');location.assign('sucursal.php')</script>"; 
+        echo "<script> alert('LOS DATOS NO FUERON ACTUALIZADOS CORRECTAMENTE, POR FAVOR REVISE QUE SUCEDIÓ');location.assign('sucursales.php')</script>"; 
       }
       mysqli_close($conexion);
     }
